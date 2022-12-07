@@ -68,13 +68,13 @@ const Chat = ({ users, messages, userName, roomId, addMessage }) => {
         >
           Online:
         </Title>
-          {users.map((name) => (
+          {/* {users.map((name) => (
               <div className={styles.usersBlock}>
               <UserOutlined className={styles.userBtn} />
             <li className={styles.li}>
               Hello</li>
               </div>
-          ))}
+          ))} */}
       </Sider>
       <Layout className={styles.test}>
         <Content
