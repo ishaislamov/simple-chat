@@ -68,20 +68,11 @@ const Chat = ({ users, messages, userName, roomId, addMessage }) => {
         >
           Online:
         </Title>
-        {/* <Menu
-          className={styles.menu}
-          theme="dark"
-          mode="inline"
-          items={[{
-            icon: <UserOutlined />,
-          }
-          ]}
-        /> */}
           {users.map((name) => (
               <div className={styles.usersBlock}>
               <UserOutlined className={styles.userBtn} />
             <li className={styles.li}>
-              {name}</li>
+              Hello</li>
               </div>
           ))}
       </Sider>
