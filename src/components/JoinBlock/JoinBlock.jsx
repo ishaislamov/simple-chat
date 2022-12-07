@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography, Form, Input } from "antd";
 import styles from "./Login.module.css";
-
+import axios from 'axios';
 import socket from '../../socket'
 
 
-const JoinBlock = () => {
+const JoinBlock = ({
+  onLogin
+}) => {
+  const [roomId, setRoomId] = React.useState('')
+  const [userName, setUserName] = React.useState('')
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -13,11 +18,19 @@ const JoinBlock = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const obj = {
+      roomId,
+      userName,
+  }
+  const onEnter = () => {
+    axios.post('./rooms', obj)
+    onLogin(obj)
+  }
   return (
     <div className={styles.container}>
       <Title 
       className={styles.title}
-      level={2}>Войти</Title>
+      level={3}>Войти</Title>
       <Form
         className={styles.inputsBlock}
         name="basic"
@@ -32,7 +45,7 @@ const JoinBlock = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Username"
+          label="Room ID"
           name="username"
           rules={[
             {
@@ -41,20 +54,22 @@ const JoinBlock = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={roomId}
+          onChange={(e) => setRoomId(e.target.value)} />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Username"
           name="password"
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: "Please input your username!",
             },
           ]}
         >
-          <Input.Password />
+          <Input value={userName}
+          onChange={(e) => setUserName(e.target.value)} />
         </Form.Item>
         <Form.Item
           className={styles.submit}
@@ -63,7 +78,7 @@ const JoinBlock = () => {
             span: 50,
           }}
         >
-          <Button className={styles.btn} type="primary" htmlType="submit">
+          <Button onClick={onEnter} className={styles.btn} type="primary" htmlType="submit">
             Войти
           </Button>
         </Form.Item>
